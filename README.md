@@ -51,5 +51,5 @@ dosyanın kendi içinde hangi anahtarın ne yaptığı yazılıdır.
 
 ## Sürüm
 
-Yayınlanan sürüm widget başlığının sağ altında görünür (`v1.9 - MetaPLM`).
+Yayınlanan sürüm widget başlığının sağ altında görünür (`v1.10 - MetaPLM`).
 Yeni sürüm bu deponun `main` dalına yeni derleme gönderilerek yayınlanır.
