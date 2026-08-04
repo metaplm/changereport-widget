@@ -49,6 +49,27 @@ dosyanın kendi içinde hangi anahtarın ne yaptığı yazılıdır.
 > burada değişikliğin commit'lenmesi ve Pages'in yeniden yayınlaması gerekir
 > (genelde 1-2 dakika). Rebuild yine gerekmez.
 
+### ⚠ `runtime-config.js` bu depoda ORTAMA ÖZELDİR
+
+Bu paket **3DEXPERIENCE bulut** tenant'ında çalışıyor. `search.baseUrl` burada
+**dolu** — federated search adresi tenant'a özeldir ve katalogdan gelen değeri
+sabitliyoruz:
+
+```
+https://r1132101868454-eu1-fedsearch.3dexperience.3ds.com
+```
+
+Değer **yalnız origin** olmalı. Kod sonuna
+`/federated/search?xrequestedwith=xmlhttprequest` kısmını kendisi ekler; tam
+URL yazılırsa yol iki kez oluşur ve istek kırılır.
+
+On-prem tarball'ında aynı alan **boş** kalmalı: orada katalogda `3DSearch`
+girdisi yok ve adres 3DSpace host'undan türetiliyor.
+
+**Yeni sürüm yayınlarken bu dosyayı `dist/` çıktısıyla EZMEYİN.** Derlemeden
+çıkan kopya `baseUrl`'i boş taşır; üzerine yazılırsa bulutta arama sessizce
+çöker.
+
 ## Sürüm
 
 Yayınlanan sürüm widget başlığının sağ altında görünür (`v1.10 - MetaPLM`).

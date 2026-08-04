@@ -35,6 +35,17 @@
 //   "caReadBatch": 100
 //   "caReadTimeoutMs": 30000
 //   "caReadTotalBudgetMs": 30000
+//
+// !!! BU DOSYA ELLE DUZENLENDI — BULUT ORTAMINA OZEL !!!
+// search.baseUrl bu depoda DOLU. Sebep: bu paket 3DEXPERIENCE BULUT tenant'inda
+// calisiyor ve federated search adresi tenant'a ozeldir. On-prem tarball'inda
+// ayni alan BOS kalmali (orada adres 3DSpace host'undan turetiliyor).
+//
+// DEGER YALNIZ ORIGIN OLMALI. Kod sonuna /federated/search?xrequestedwith=...
+// kismini kendisi ekler; tam URL yazilirsa yol iki kez olusur ve istek kirilir.
+//
+// YENI SURUM YAYINLARKEN: bu dosyayi build ciktisiyla EZMEYIN. dist/ icindeki
+// kopya baseUrl'i bos tasir; uzerine yazilirsa bulutta arama sessizce coker.
 // ============================================================================
 window.__WIDGET_RUNTIME_CONFIG__ = Object.assign(
     window.__WIDGET_RUNTIME_CONFIG__ || {},
@@ -60,7 +71,7 @@ window.__WIDGET_RUNTIME_CONFIG__ = Object.assign(
         },
         "search": {
             "enabled": true,
-            "baseUrl": "",
+            "baseUrl": "https://r1132101868454-eu1-fedsearch.3dexperience.3ds.com",
             "pageSize": 1000,
             "windowMonths": 3,
             "maxResults": 20000,
