@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:widget="http://www.netvibes.com/ns/">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Change Report</title>
+        <script type="text/javascript">
+            // Widget'ın kendi URL'sini tespit et.
+            // Bu script runtime-config.js ve bundle.js'den ÖNCE çalışmalıdır.
+            (function initializeWidgetPath() {
+                var widgetBaseUrl = null;
+
+                // 1) 3DDashboard gerçek widget objesini enjekte ettiyse uwaUrl'i kullan
+                if (typeof window !== "undefined" && window.widget && window.widget.uwaUrl) {
+                    widgetBaseUrl = window.widget.uwaUrl;
+                    if (widgetBaseUrl.charAt(widgetBaseUrl.length - 1) !== "/") {
+                        widgetBaseUrl += "/";
+                    }
+                }
+
+                // 2) Aksi halde bu script etiketinin konumundan türet
+                if (!widgetBaseUrl && document.currentScript && document.currentScript.src) {
+                    var scriptSrc = document.currentScript.src;
+                    widgetBaseUrl = scriptSrc.substring(0, scriptSrc.lastIndexOf("/") + 1);
+                }
+
+                // 3) Son çare: sayfa konumu
+                if (!widgetBaseUrl) {
+                    var loc = window.location;
+                    widgetBaseUrl = loc.protocol + "//" + loc.host +
+                        loc.pathname.substring(0, loc.pathname.lastIndexOf("/") + 1);
+                }
+
+                window.__WIDGET_BASE_URL__ = widgetBaseUrl;
+
+                if (typeof __webpack_public_path__ !== "undefined") {
+                    __webpack_public_path__ = widgetBaseUrl;
+                }
+
+                if (!window.__WIDGET_RUNTIME_CONFIG__) {
+                    window.__WIDGET_RUNTIME_CONFIG__ = {};
+                }
+                // NOT: imageBaseUrl BURADA SET EDİLMEZ. Buradan türetilen mutlak URL
+                // 3DDashboard içinde widget'ı değil dashboard sayfasını gösteriyordu ve
+                // logo dahil tüm görseller 404 dönüyordu. Görsel yolu artık
+                // runtime-config.js + build-time __STATIC_BASE__ üzerinden çözülür
+                // (varsayılan: göreli "./static/images/") — MyEnovia ile aynı desen.
+            })();
+        </script>
+        <script type="text/javascript" src="runtime-config.js"></script>
+        <script type="text/javascript" src="bundle.js"></script>
+    </head>
+    <body>
+        <app></app>
+    </body>
+</html>
